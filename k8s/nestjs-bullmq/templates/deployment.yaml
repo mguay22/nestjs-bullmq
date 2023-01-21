@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: nestjs-bullmq
+  name: nestjs-bullmq
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: nestjs-bullmq
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: nestjs-bullmq
+    spec:
+      containers:
+        - image: mguay/nestjs-bullmq
+          env:
+            - name: REDIS_HOST
+              value: nestjs-bullmq-redis-master
+            - name: REDIS_PORT
+              value: '6379'
+          name: nestjs-bullmq
+          ports:
+            - containerPort: 3000
+          resources: {}
+status: {}
